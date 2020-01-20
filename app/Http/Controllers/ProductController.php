@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Harga;
+use App\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -71,5 +72,28 @@ class ProductController extends Controller
 			$hasil['message']="data tidak ditemukan";
 		}
 		return $hasil;
+	}
+	public function home()
+	{
+		$cek = DB::select( "SELECT * from product limit 20");
+		$hasil=array();
+
+		return view('home', compact('cek'));
+	}
+	public function add(Request $request){
+	    return view('add');
+	}
+
+	public function store(Request $request){
+	    $validasi = $request->validate([
+			'p_name' => 'required',
+			'p_barcode' => 'required',
+			'p_avatar' => 'required',
+			'p_harga_standar' => 'required'
+			
+	    ]);
+	   	Product::create($validasi);
+
+	    return redirect('home');
 	}
 }
