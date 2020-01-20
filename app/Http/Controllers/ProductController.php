@@ -85,14 +85,22 @@ class ProductController extends Controller
 	}
 
 	public function store(Request $request){
+		$input = $request->all();
 	    $validasi = $request->validate([
 			'p_name' => 'required',
 			'p_barcode' => 'required',
 			'p_avatar' => 'required',
 			'p_harga_standar' => 'required'
 			
-	    ]);
-	   	Product::create($validasi);
+		]);
+		$target_dir = public_path()."/img/";
+		$target_file = $target_dir . basename($_FILES["p_avatar"]["name"]);
+		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+		$file_name=$target_dir.$input['p_barcode'].".".$imageFileType;
+		move_uploaded_file($_FILES["p_avatar"]["tmp_name"], $file_name);
+		
+		$input['p_avatar'] = $input['p_barcode'].".".$imageFileType;
+	   	Product::create($input);
 
 	    return redirect('home');
 	}
