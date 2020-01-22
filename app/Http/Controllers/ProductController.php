@@ -75,10 +75,8 @@ class ProductController extends Controller
 	}
 	public function home()
 	{
-		$cek = DB::select( "SELECT * from product limit 20");
-		$hasil=array();
-
-		return view('home', compact('cek'));
+		$product = DB::select( "SELECT * from product limit 20");
+		return view('home', compact('product'));
 	}
 	public function add(Request $request){
 	    return view('add');
@@ -100,8 +98,15 @@ class ProductController extends Controller
 		move_uploaded_file($_FILES["p_avatar"]["tmp_name"], $file_name);
 		
 		$input['p_avatar'] = $input['p_barcode'].".".$imageFileType;
+
 	   	Product::create($input);
 
 	    return redirect('home');
 	}
+	// public function edit($p_id){
+	// 	$product = Product::find()->
+	// 	// $product = Product::find($p_id);
+	// 	// return view('edit', compact('product'));
+	// 	return view('crud/edit');
+	// }
 }

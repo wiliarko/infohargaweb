@@ -4,9 +4,11 @@ Route::get('/', function () {
     return view('coba');
 });
 
-Route::get('home', 'ProductController@home');
-Route::get('add', 'ProductController@add');
+Route::get('home', 'newController@index');
+Route::get('add', 'newController@add');
 Route::post('add', 'ProductController@store');
+Route::get('crud/{p_id}/edit', 'newController@edit');
+Route::post('/crud/save', 'newController@update');
 
 
 Route::resource('coba', 'CobaController');

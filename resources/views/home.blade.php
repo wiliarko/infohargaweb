@@ -6,8 +6,7 @@
       {{ session()->get('success') }}  
     </div><br/>
   @endif
-    <a class="nav-item nav-link" href="{{url('add')}}">Tambah</a>
-    <a class="nav-item nav-link" href="{{url('/crud/daftar')}}">Chat</a>
+  
   <table class="table table-striped border text-center">
     <thead>
         <tr>
@@ -16,20 +15,25 @@
           <td>Nama Barang</td>
           <td>Gambar Barang</td>
           <td>Harga Barang</td>
+          <td colspan="2">Kelola Data</td>
         </tr>
     </thead>
     <tbody>
        <?php $i =1 ?>
-        @foreach($cek as $user)
+        @foreach($product as $user)
         <tr>
-            <td>{{$i}}</td>
+            <td>{{$user->p_id}}</td>
             <td>{{$user->p_barcode}}</td>
             <td>{{$user->p_name}}</td>
             <td>{{$user->p_avatar}}</td>
             <td>{{$user->p_harga_standar}}</td>
+            <td><a href="crud/{{$user->p_id}}/edit" class="btn btn-warning">Edit</a></td>
+            <td><a href="" class="btn btn-danger">Delete</a>
+            </td>
         </tr>
         <?php $i++ ?>
         @endforeach
     </tbody>
   </table>
+  <center><a class="btn btn-primary" href="{{url('add')}}">Tambah</a></center>
 @endsection
