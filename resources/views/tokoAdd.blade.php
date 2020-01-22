@@ -15,23 +15,23 @@
         </ul>
       </div><br/>
     @endif
-      <form method="post" action="{{url('product/add')}}" enctype="multipart/form-data">
+      <form method="post" action="{{url('toko/add')}}">
         @csrf
           <div class="form-group"> 
-              <label>Nama</label>
-              <input type="text" class="form-control" name="p_name"/>
+              <label>Nama Toko</label>
+              <input type="text" class="form-control" name="t_name"/>
           </div>
           <div class="form-group">
-              <label>Barcode</label>
-              <input type="text" class="form-control" name="p_barcode"/>
+              <label>Toko Long</label>
+              <input type="text" class="form-control" name="t_long"/>
           </div>
           <div class="form-group">
-              <label>Gambar</label>
-              <input type="file" class="form-control" name="p_avatar"/>
+              <label>Toko Lat</label>
+              <input type="text" class="form-control" name="t_lat"/>
           </div>
           <div class="form-group">
-              <label>Harga</label>
-              <input type="text" class="form-control" name="p_harga_standar"/>
+              <label>Radius</label>
+              <input type="text" class="form-control" name="t_radius_toko"/>
           </div>
           <button type="submit" class="btn btn-primary">Tambah Data</button>
       </form>

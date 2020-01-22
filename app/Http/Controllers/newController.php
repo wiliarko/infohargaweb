@@ -58,7 +58,7 @@ class newController extends Controller
         
         Product::create($store);
             
-        return redirect('home');
+        return redirect('product');
     }
 
     /**
@@ -100,7 +100,7 @@ class newController extends Controller
         unset($store["_token"]);
         Product::where("p_id" ,$store["p_id"])->update($store);
             
-        return redirect('home');
+        return redirect('product');
     }
 
     public function destroy($p_id)
@@ -109,6 +109,6 @@ class newController extends Controller
         $destroy = Product::findOrFail($p_id);
 	    $destroy->delete();
 
-	    return redirect('home');
+	    return redirect('product');
     }
 }
