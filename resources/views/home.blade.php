@@ -22,18 +22,18 @@
        <?php $i =1 ?>
         @foreach($product as $user)
         <tr>
-            <td>{{$user->p_id}}</td>
+            <td>{{$i}}</td>
             <td>{{$user->p_barcode}}</td>
             <td>{{$user->p_name}}</td>
             <td>{{$user->p_avatar}}</td>
             <td>{{$user->p_harga_standar}}</td>
-            <td><a href="crud/{{$user->p_id}}/edit" class="btn btn-warning">Edit</a></td>
-            <td><a href="" class="btn btn-danger">Delete</a>
+            <td><a href="product/{{$user->p_id}}/edit" class="btn btn-warning">Edit</a></td>
+            <td><a href="product/{{$user->p_id}}/delete" class="btn btn-danger">Delete</a>
             </td>
         </tr>
         <?php $i++ ?>
         @endforeach
     </tbody>
   </table>
-  <center><a class="btn btn-primary" href="{{url('add')}}">Tambah</a></center>
+  <center><a class="btn btn-primary" href="{{url('product/add')}}">Tambah</a></center>
 @endsection

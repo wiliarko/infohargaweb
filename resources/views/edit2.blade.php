@@ -6,7 +6,7 @@
     Form Edit Data
   </div>
   <div class="card-body">
-    <form action="/crud/save" method="post">
+    <form action="/product/save" method="post" enctype="multipart/form-data">
         @csrf
             <div class="form-group"> 
               <label>Nama Barang</label>

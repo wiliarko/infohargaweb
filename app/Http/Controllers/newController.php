@@ -71,41 +71,44 @@ class newController extends Controller
     {
         //
         $product = Product::find($p_id);
-        return view('crud/edit', compact('product'));
+        // echo "<pre>"; var_dump($product);
+        // die();
+        return view('edit2', compact('product'));
     }
 
     public function update(Request $request)
     {
         //
         $store = $request->all();
-        $validate = $request->validate([
-            'p_name' => 'required|alpha',
-            'p_barcode' => 'required',//|unique:users',
-            'p_avatar' => 'required',
-            'p_harga_standar' => 'required|numeric'
-        ]);
-
+        // $validate = $request->validate([
+        //     'p_name' => 'required|alpha',
+        //     'p_barcode' => 'required',//|unique:users',
+        //     'p_avatar' => 'required',
+        //     'p_harga_standar' => 'required|numeric'
+        //     ]);
+            
+            // die("asdasd");
         $target_dir = public_path()."/img/";
+        // echo "<pre>";var_dump($store);
+        // die();
 		$target_file = $target_dir . basename($_FILES["p_avatar"]["name"]);
 		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 		$file_name=$target_dir.$store['p_barcode'].".".$imageFileType;
 		move_uploaded_file($_FILES["p_avatar"]["tmp_name"], $file_name);
 		
         $store['p_avatar'] = $store['p_barcode'].".".$imageFileType;
-        
-        Product::where($store->$p_id)->update($store);
+        unset($store["_token"]);
+        Product::where("p_id" ,$store["p_id"])->update($store);
             
         return redirect('home');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($p_id)
     {
         //
+        $destroy = Product::findOrFail($p_id);
+	    $destroy->delete();
+
+	    return redirect('home');
     }
 }

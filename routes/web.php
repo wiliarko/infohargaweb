@@ -4,13 +4,16 @@ Route::get('/', function () {
     return view('coba');
 });
 
-Route::get('home', 'newController@index');
-Route::get('add', 'newController@add');
-Route::post('add', 'ProductController@store');
-Route::get('crud/{p_id}/edit', 'newController@edit');
-Route::post('/crud/save', 'newController@update');
+Route::get('home', 'NewController@index');
+Route::get('product/add', 'NewController@add');
+Route::post('product/add', 'NewController@store');
+Route::get('product/{p_id}/edit', 'NewController@edit');
+Route::post('product/save', 'NewController@update');
+Route::get('product/{p_id}/delete', 'NewController@destroy');
 
 
-Route::resource('coba', 'CobaController');
-Route::resource('product', 'ProductController');
-Route::resource('product/add', 'ProductController@addproduct');
+//Route::resource('product', 'NewController');
+
+// Route::resource('coba', 'CobaController');
+// Route::resource('product', 'ProductController');
+// Route::resource('product/add', 'ProductController@addproduct');
