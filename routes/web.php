@@ -1,8 +1,8 @@
 <?php
 
-Route::get('/', function () {
-    return view('coba');
-});
+// Route::get('/', function () {
+//     return view('coba');
+// });
 
 Route::get('product', 'NewController@index');
 Route::get('product/add', 'NewController@add');
@@ -17,6 +17,9 @@ Route::post('toko/add', 'tokoController@store');
 Route::get('toko/{t_id}/edit', 'tokoController@edit');
 Route::post('toko/save', 'tokoController@update');
 Route::get('toko/{t_id}/delete', 'tokoController@destroy');
+
+// Route::post('login', 'userController@login');
+
 
 
 
