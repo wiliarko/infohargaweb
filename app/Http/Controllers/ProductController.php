@@ -56,9 +56,34 @@ class ProductController extends Controller
 	public function update(Request $request)
 	{
 		$input = $request->all();
+		$rumus = DB::select( "SELECT
+					t_id, (
+						6371000 * acos (
+						cos ( radians(".$input['lat'].") )
+						* cos( radians( t_lat ) )
+						* cos( radians( t_long ) - radians(".$input['long'].") )
+						+ sin ( radians(".$input['lat'].") )
+						* sin( radians( t_lat ) )
+						)
+					) AS distance
+					FROM toko where t_radius_toko > (
+						6371000 * acos (
+						cos ( radians(".$input['lat'].") )
+						* cos( radians( t_lat ) )
+						* cos( radians( t_long ) - radians(".$input['long'].") )
+						+ sin ( radians(".$input['lat'].") )
+						* sin( radians( t_lat ) )
+						)
+					)");
+				// echo "<pre>";	var_dump($rumus);
+				// die();
 		$data=array(
 			"h_price"=>$input['h_price'],
-			"h_barcode"=>$input['barcode']
+			"h_barcode"=>$input['barcode'],
+			"lon"=>$input['long'],
+			"lat"=>$input['lat'],
+			"h_u_id"=>$input['u_id'],
+			"h_toko_id"=>$rumus[0]->t_id
 		);
 
 	    $cek=Harga::create($data);
